@@ -20,14 +20,14 @@ class ProcessController extends Controller
             'summernote' => 'required_without:fileHtml',
         ]);
 
+        if($request->has('summernote')) {
+            $htmlContent = $request->input('summernote');
+        }
+
         // El contenido HTML que deseas convertir
         if($request->hasFile('fileHtml')) {
             $file = $request->file('fileHtml');
             $htmlContent = file_get_contents($file->getRealPath());
-        }
-
-        if($request->has('summernote')) {
-            $htmlContent = $request->input('summernote');
         }
 
         // Crea un nuevo documento de PHPWord
